@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cotação do Bitcoin</title>
+  </head>
+  <body>
+    <h1>Cotação do Bitcoin</h1>
+    <link rel="stylesheet" href="style.css">
+    <p>Última atualização: <span id="last-update"></span></p>
+    <p>Cotação atual: <span id="current-price"></span> USD</p>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.getJSON(
+          "https://api.coindesk.com/v1/bpi/currentprice.json",
+          function(data) {
+            var lastUpdate = data.time.updated;
+            var currentPrice = data.bpi.USD.rate_float.toFixed(2);
+
+            $("#last-update").text(lastUpdate);
+            $("#current-price").text(currentPrice);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
